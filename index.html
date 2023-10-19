@@ -9,17 +9,22 @@
    </style>
    <link href="main.css" rel="stylesheet" type="text/css">
    <script>
-	const URL = "https://api.nasa.gov/planetary/apod?api_key=fs3yGgMQ2oun7FYErtNlMLpuxgf5VAhV8sgou5ze";
+	const URL = "https://api.nasa.gov/planetary/apod?api_key=fs3yGgMQ2oun7FYErtNlMLpuxgf5VAhV8sgou5ze&date=2008-10-25";
 	   async function makeAPICall() {
 		   const result = await fetch(URL)
 		   result.json().then(data => { 
 			   const img = data.url;
 			   const caption = data.explanation
-			   console.log(img)
-			   const new_str = caption.substring(0, caption.indexOf("APOD"));
+			   var leastIndex = Math.min(caption.indexOf("APOD"), caption.indexOf("Album"))
+			   const new_str = caption.substring(0, leastIndex);
+			   if (Math.abs(0 + leastIndex) > 5) {
+				document.getElementById("caption").innerHTML = new_str
+			   } else {
+				document.getElementById("caption").innerHTML = caption
+			   }
+			   document.getElementById("APODIMG").src = img;	
 			   
-			   document.getElementById("APODIMG").src = img;
-			   document.getElementById("caption").innerHTML = new_str
+			   console.log(caption)
 			   
 		   })
 		}
@@ -37,7 +42,7 @@
       <p id="para1">The Solar system is the local system in which we reside. It contains 1 star and 8 planets. The eight planets are from closest to furthest is <a href="Mercury.html" target="_blank">Mercury</a>, <a href="Venus.html" target="_blank">Venus</a>, <a href="Earth.html" target="_self">Earth</a>(the only planet with liquid water and habitable to life), <a href="Mars.html" tagret="_blank">Mars</a>, <a href="Jupiter.html" target="_blank">Jupiter</a> <a href="Saturn.html" target="_blank">Saturn</a>, <a href="Neptune.html" target="_blank">Neptune</a> and <a href="Uranus.html" target="_blank">Uranus</a>. </p>
 		<div class="APOD">
 		<h2 style="font-size: 4em; margin-top: 100px">Astronomy photo of the day</h2>
-			<img id="APODIMG" src="" alt="" style="width: 80%; border-radius: 20px;">
+			<img id="APODIMG" src="" alt="" style=" max-width: 80% ; max-height: 800px; border-radius: 20px;">
 			<p id="caption" style="font-size: 2em; margin-left: 10%; margin-right: 10%;"></p>
 			
 
