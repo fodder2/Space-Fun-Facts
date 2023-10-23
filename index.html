@@ -9,29 +9,7 @@
    </style>
    <link href="main.css" rel="stylesheet" type="text/css">
    <script>
-	const URL = "https://api.nasa.gov/planetary/apod?api_key=fs3yGgMQ2oun7FYErtNlMLpuxgf5VAhV8sgou5ze&date=2008-10-25";
-	   async function makeAPICall() {
-		   const result = await fetch(URL)
-		   result.json().then(data => { 
-			   const img = data.url;
-			   const caption = data.explanation
-			   var leastIndex = Math.min(caption.indexOf("APOD"), caption.indexOf("Album"))
-			   const new_str = caption.substring(0, leastIndex);
-			   if (Math.abs(0 + leastIndex) > 5) {
-				document.getElementById("caption").innerHTML = new_str
-			   } else {
-				document.getElementById("caption").innerHTML = caption
-			   }
-			   document.getElementById("APODIMG").src = img;	
-			   
-			   console.log(caption)
-			   
-		   })
-		}
-	   
-	   
-		   makeAPICall()
-		      
+	
    </script>
 </head>
 
@@ -44,6 +22,7 @@
 		<h2 style="font-size: 4em; margin-top: 100px">Astronomy photo of the day</h2>
 			<img id="APODIMG" src="" alt="" style=" max-width: 80% ; max-height: 800px; border-radius: 20px;">
 			<p id="caption" style="font-size: 2em; margin-left: 10%; margin-right: 10%;"></p>
+			<input type="date" id="datePickerId" name="date" value=""/>
 			
 
 		</div>
@@ -73,7 +52,7 @@
     </div>
     <img id="img" src="https://scx2.b-cdn.net/gfx/news/hires/2019/galaxy.jpg" alt="" style="width:100%">
   </div>
-
+   <script src="main.js" defer></script>
 </body>
 
 </html> 
